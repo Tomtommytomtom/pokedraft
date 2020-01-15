@@ -5,7 +5,7 @@
     </v-row>
     <v-row no-gutters>
       <v-col>
-        stat placeholder
+        <stat-display :stats="statsArray" />
       </v-col>
       <v-col>
         abilities placeholder
@@ -19,10 +19,15 @@
 
 <script>
 import { bus } from '@/main'
+import StatDisplay from '../StatDisplay'
+
 export default {
+  components: {
+    StatDisplay
+  },
   data() {
     return {
-      pokemon: {}
+      pokemon: undefined
     }
   },
 

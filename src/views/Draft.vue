@@ -5,38 +5,39 @@
         <v-row no-gutters>
           <v-col cols="2">team</v-col>
           <v-divider vertical light />
-          <v-col cols="7"><pokemon-details /></v-col>
+          <v-col cols="7"
+            ><smart-pokemon-details :pokemon="selectedPokemon"
+          /></v-col>
           <v-divider vertical light />
           <v-col>shop</v-col>
         </v-row>
       </v-container>
     </v-sheet>
     <v-divider light />
-    <pokemon-footer
-      v-model="selectedPokemon"
-      :pokemon-array-prop="pokemonArray"
-    />
+    <pokemon-footer :pokemon-array-prop="pokemonArray" />
   </v-sheet>
 </template>
 
 <script>
 import pokeApiService from '@/apis/pokeApiService'
 import PokemonFooter from '@/components/draft/PokemonFooter'
-import PokemonDetails from '@/components/draft/PokemonDetails'
+import SmartPokemonDetails from '@/components/draft/SmartPokemonDetails'
+
+import { bus } from '@/main'
 
 export default {
   name: 'Home',
 
   components: {
     PokemonFooter,
-    PokemonDetails
+    SmartPokemonDetails
   },
 
   data() {
     return {
       pokemon: {},
       pokemonArray: [],
-      selectedPokemon: {}
+      selectedPokemon: undefined
     }
   },
 
@@ -56,9 +57,20 @@ export default {
       .catch(error => {
         console.log('there was an error: ', error)
       })
+
+    bus.$on('pokemon-hovered', pokemon => {
+      this.selectedPokemon = pokemon
+    })
   },
 
-  methods: {}
+  methods: {
+    draftSixPokemon() {
+      console.log('draft here')
+    },
+    generateSixRandomids() {
+      console.log('generate ids here')
+    }
+  }
 }
 </script>
 
