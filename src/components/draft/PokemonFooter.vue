@@ -10,6 +10,7 @@
 
 <script>
 import PokemonContainer from '../PokemonContainer'
+
 export default {
   components: {
     PokemonContainer

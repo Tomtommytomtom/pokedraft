@@ -23,6 +23,8 @@ import pokeApiService from '@/apis/pokeApiService'
 import PokemonFooter from '@/components/draft/PokemonFooter'
 import SmartPokemonDetails from '@/components/draft/SmartPokemonDetails'
 
+import Pokemon from '@/utils/pokemon'
+
 import { bus } from '@/main'
 
 export default {
@@ -51,8 +53,7 @@ export default {
     pokeApiService
       .getSixPokemon([1, 2, 3, 4, 5, 6])
       .then(arg => {
-        console.log('finished')
-        this.pokemonArray = arg
+        this.pokemonArray = arg.map(pokemon => new Pokemon(pokemon))
       })
       .catch(error => {
         console.log('there was an error: ', error)

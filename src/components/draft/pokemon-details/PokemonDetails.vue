@@ -5,7 +5,7 @@
     </v-row>
     <v-row no-gutters>
       <v-col>
-        <stat-display :stats="statsArray" />
+        <stat-display :stats-prop="pokemon.getStatsObject()" />
       </v-col>
       <v-col>
         abilities placeholder
