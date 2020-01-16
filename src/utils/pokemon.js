@@ -11,7 +11,7 @@ export default class Pokemon {
     //returns {hp: number, attack: number, special-attack: number...}
     let stats = {}
     this.statInfo.forEach(stat => {
-      stats[stat] = stat.base_stat
+      stats[stat.stat.name] = stat.base_stat
     })
     return stats
   }
@@ -28,7 +28,7 @@ export default class Pokemon {
   }
 
   getSumOfStats() {
-    return this.getStatsObject.values().reduce((acc, curr) => {
+    return Object.values(this.getStatsObject).reduce((acc, curr) => {
       return acc + curr
     }, 0)
   }

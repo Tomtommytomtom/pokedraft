@@ -21,7 +21,7 @@ export default {
   },
   methods: {
     hover() {
-      console.log('emitted', this.name)
+      console.log('emitted', this.pokemon)
       bus.$emit('pokemon-hovered', this.pokemon)
     }
   }

@@ -6,7 +6,7 @@
           <v-col cols="2">team</v-col>
           <v-divider vertical light />
           <v-col cols="7"
-            ><smart-pokemon-details :pokemon="selectedPokemon"
+            ><smart-pokemon-details :local-pokemon="selectedPokemon"
           /></v-col>
           <v-divider vertical light />
           <v-col>shop</v-col>

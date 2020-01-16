@@ -1,26 +1,47 @@
-<template>
-  <v-sparklines :value="stats" :labels="statNames"></v-sparklines>
-</template>
-
 <script>
+import { Radar } from 'vue-chartjs'
+
 export default {
+  extends: Radar,
   props: {
-    statsProp: {
+    pokemon: {
       type: Object
     }
   },
 
   data() {
-    return {}
+    return {
+      stats: this.pokemon.getStatsObject()
+    }
   },
 
   computed: {
-    stats() {
-      return this.statsProp.values()
+    statValues() {
+      console.log(Object.values(this.stats))
+      return Object.values(this.stats)
     },
     statNames() {
-      return this.statsProp.keys()
+      console.log(Object.keys(this.stats), this.stats)
+      return Object.keys(this.stats)
     }
+  },
+
+  watch: {
+    pokemon() {
+      this.stats = this.pokemon.getStatsObject()
+    }
+  },
+  mounted() {
+    this.renderChart({
+      labels: this.statNames,
+      datasets: [
+        {
+          label: this.pokemon.name,
+          backgroundColor: 'green',
+          data: this.statValues
+        }
+      ]
+    })
   }
 }
 </script>

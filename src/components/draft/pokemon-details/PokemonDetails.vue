@@ -4,15 +4,13 @@
       {{ pokemon.name }}
     </v-row>
     <v-row no-gutters>
-      <v-col>
-        <stat-display :stats-prop="pokemon.getStatsObject()" />
-      </v-col>
+      <v-col> </v-col>
       <v-col>
         abilities placeholder
       </v-col>
     </v-row>
-    <v-row no-gutters>
-      info and pick
+    <v-row no-gutters style="border: solid yellow">
+      <stat-display class="ma-auto" :pokemon="pokemon" />
     </v-row>
   </v-sheet>
 </template>
@@ -25,13 +23,19 @@ export default {
   components: {
     StatDisplay
   },
+
+  props: {
+    localPokemon: Object
+  },
+
   data() {
     return {
-      pokemon: undefined
+      pokemon: this.localPokemon
     }
   },
 
-  beforeCreate() {
+  created() {
+    console.log('i am now created', this)
     bus.$on('pokemon-hovered', pokemon => {
       console.log('received')
       this.pokemon = pokemon
