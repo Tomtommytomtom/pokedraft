@@ -1,7 +1,7 @@
 <template>
   <v-sheet>
     <v-row no-gutters>
-      {{ pokemon.name }}
+      <pokemon-container :pokemon="pokemon" />
     </v-row>
     <v-row no-gutters>
       <v-col> </v-col>
@@ -9,7 +9,7 @@
         abilities placeholder
       </v-col>
     </v-row>
-    <v-row no-gutters style="border: solid yellow">
+    <v-row no-gutters>
       <stat-display class="ma-auto" :pokemon="pokemon" />
     </v-row>
   </v-sheet>
@@ -18,10 +18,12 @@
 <script>
 import { bus } from '@/main'
 import StatDisplay from '../StatDisplay'
+import PokemonContainer from '../../PokemonContainer'
 
 export default {
   components: {
-    StatDisplay
+    StatDisplay,
+    PokemonContainer
   },
 
   props: {

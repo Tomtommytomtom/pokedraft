@@ -51,7 +51,7 @@ export default {
 
   created() {
     pokeApiService
-      .getSixPokemon([1, 2, 3, 4, 5, 6])
+      .getSixPokemon([1, 2, 3, 4, 213, 113])
       .then(arg => {
         this.pokemonArray = arg.map(pokemon => new Pokemon(pokemon))
       })

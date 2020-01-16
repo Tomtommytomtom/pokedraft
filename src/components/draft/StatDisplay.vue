@@ -1,8 +1,17 @@
+<template>
+  <radar-chart
+    :styles="chartStyles"
+    :chart-data="chartData"
+    :options="chartOptions"
+  />
+</template>
 <script>
-import { Radar } from 'vue-chartjs'
+import RadarChart from './RadarChart.vue'
 
 export default {
-  extends: Radar,
+  components: {
+    RadarChart
+  },
   props: {
     pokemon: {
       type: Object
@@ -16,13 +25,40 @@ export default {
   },
 
   computed: {
-    statValues() {
-      console.log(Object.values(this.stats))
-      return Object.values(this.stats)
+    chartData() {
+      return {
+        labels: this.pokemon.getStatLabels(),
+        datasets: [
+          {
+            label: this.pokemon.name,
+            color: 'green',
+            borderColor: this.pokemon.getColorForType(0.5),
+            borderWidth: 5,
+            data: this.pokemon.getStatOrderedArray(),
+            fill: false
+          }
+        ]
+      }
     },
-    statNames() {
-      console.log(Object.keys(this.stats), this.stats)
-      return Object.keys(this.stats)
+    chartOptions() {
+      return {
+        scale: {
+          ticks: {
+            min: 0,
+            max: 200,
+            stepSize: 50,
+            showLabelBackdrop: false
+          },
+          gridLines: {
+            display: false
+          }
+        }
+      }
+    },
+    chartStyles() {
+      return {
+        color: 'grey'
+      }
     }
   },
 
@@ -30,18 +66,6 @@ export default {
     pokemon() {
       this.stats = this.pokemon.getStatsObject()
     }
-  },
-  mounted() {
-    this.renderChart({
-      labels: this.statNames,
-      datasets: [
-        {
-          label: this.pokemon.name,
-          backgroundColor: 'green',
-          data: this.statValues
-        }
-      ]
-    })
   }
 }
 </script>
