@@ -5,7 +5,7 @@
       :key="pokemon.id"
       :pokemon="pokemon"
       class="ma-auto"
-      @hover="selectPokemon"
+      @click="selectPokemon"
     />
   </v-sheet>
   <v-sheet v-else><p>loading</p></v-sheet>
@@ -47,6 +47,9 @@ export default {
   methods: {
     selectPokemon(pokemon) {
       bus.$emit('pokemon-selected', pokemon)
+    },
+    pickPokemon(pokemon) {
+      bus.$emit('pokemon-picked', pokemon)
     }
   }
 }

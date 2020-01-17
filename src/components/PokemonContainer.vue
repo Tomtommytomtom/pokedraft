@@ -1,5 +1,10 @@
 <template>
-  <v-card @mouseover="hover">
+  <v-card
+    width="124px"
+    style="border-radius: 3px; border: solid rgba(255,255,255,0.1) 1px"
+    @mouseover="hover"
+    @click="clicked"
+  >
     <v-img :src="pokemon.getSprite()" :alt="pokemon.name" height="124px" />
   </v-card>
 </template>
@@ -21,6 +26,9 @@ export default {
     hover() {
       console.log('in hover inside container')
       this.$emit('hover', this.pokemon)
+    },
+    clicked() {
+      this.$emit('click', this.pokemon)
     }
   }
 }
