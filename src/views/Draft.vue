@@ -49,10 +49,19 @@ export default {
 
   created() {
     this.draftSixPokemon()
+    bus.$on('pokemon-selected', pokemon => {
+      this.selectedPokemon = pokemon
+    })
+    bus.$on('pokemon-picked', pokemon => {
+      console.log(pokemon.getNameLabel(), ' was picked')
+      this.draftSixPokemon()
+    })
   },
 
   methods: {
     draftSixPokemon() {
+      this.pokemonArray = []
+      this.selectedPokemon = null
       pokeApiService
         .getSixPokemon(this.generateSixRandomids())
         .then(arg => {
@@ -61,14 +70,6 @@ export default {
         .catch(error => {
           console.log('there was an error', error)
         })
-
-      bus.$on('pokemon-selected', pokemon => {
-        this.selectedPokemon = pokemon
-      })
-      bus.$on('pokemon-picked', pokemon => {
-        console.log(pokemon.getNameLabel(), ' was picked')
-        this.draftSixPokemon()
-      })
     },
     generateSixRandomids() {
       let ids = [1, 2, 3, 4, 5, 6]
