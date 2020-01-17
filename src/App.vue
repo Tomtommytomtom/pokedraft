@@ -1,21 +1,17 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark> </v-app-bar>
+    <v-app-bar app color="primary" dark>POKEDRAFT</v-app-bar>
     <v-content>
-      <draft />
+      <router-view></router-view>
     </v-content>
   </v-app>
 </template>
 
 <script>
-import Draft from './views/Draft'
-
 export default {
   name: 'App',
 
-  components: {
-    Draft
-  },
+  components: {},
 
   data: () => ({
     //

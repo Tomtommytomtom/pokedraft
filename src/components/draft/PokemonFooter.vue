@@ -1,5 +1,5 @@
 <template>
-  <v-sheet class="d-flex" height="20%">
+  <v-sheet v-if="pokemonArray.length !== 0" class="d-flex" height="20%">
     <pokemon-container
       v-for="pokemon in pokemonArray"
       :key="pokemon.id"
@@ -8,6 +8,7 @@
       @hover="selectPokemon"
     />
   </v-sheet>
+  <v-sheet v-else><p>loading</p></v-sheet>
 </template>
 
 <script>
@@ -24,8 +25,7 @@ export default {
       type: Object
     },
     pokemonArrayProp: {
-      type: Array,
-      default: () => [{ name: 'tim' }, { name: 'tim' }]
+      type: Array
     }
   },
 

@@ -2,12 +2,11 @@
   <v-sheet>
     <v-row no-gutters>
       <pokemon-container :pokemon="pokemon" />
-    </v-row>
-    <v-row no-gutters>
       <v-card-title>{{ pokemon.getAbilityString() }}</v-card-title>
     </v-row>
     <v-row no-gutters>
       <stat-display class="ma-auto" :pokemon="pokemon" />
+      <p>trivia placeholder</p>
     </v-row>
   </v-sheet>
 </template>
