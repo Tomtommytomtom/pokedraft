@@ -51,7 +51,7 @@ export default {
 
   created() {
     pokeApiService
-      .getSixPokemon([1, 2, 3, 4, 213, 113])
+      .getSixPokemon(this.generateSixRandomids())
       .then(arg => {
         this.pokemonArray = arg.map(pokemon => new Pokemon(pokemon))
       })
@@ -59,7 +59,7 @@ export default {
         console.log('there was an error: ', error)
       })
 
-    bus.$on('pokemon-hovered', pokemon => {
+    bus.$on('pokemon-selected', pokemon => {
       this.selectedPokemon = pokemon
     })
   },
@@ -69,7 +69,8 @@ export default {
       console.log('draft here')
     },
     generateSixRandomids() {
-      console.log('generate ids here')
+      let ids = [1, 2, 3, 4, 5, 6]
+      return ids.map(() => Math.floor(Math.random() * 801))
     }
   }
 }

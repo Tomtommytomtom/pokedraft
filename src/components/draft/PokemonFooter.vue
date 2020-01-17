@@ -4,12 +4,15 @@
       v-for="pokemon in pokemonArray"
       :key="pokemon.id"
       :pokemon="pokemon"
+      class="ma-auto"
+      @hover="selectPokemon"
     />
   </v-sheet>
 </template>
 
 <script>
 import PokemonContainer from '../PokemonContainer'
+import { bus } from '@/main'
 
 export default {
   components: {
@@ -41,7 +44,11 @@ export default {
       console.log('i changed too', this.pokemonArray)
     }
   },
-  methods: {}
+  methods: {
+    selectPokemon(pokemon) {
+      bus.$emit('pokemon-selected', pokemon)
+    }
+  }
 }
 </script>
 

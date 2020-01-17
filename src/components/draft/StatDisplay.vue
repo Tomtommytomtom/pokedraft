@@ -20,7 +20,8 @@ export default {
 
   data() {
     return {
-      stats: this.pokemon.getStatsObject()
+      stats: this.pokemon.getStatsObject(),
+      maxTick: 150
     }
   },
 
@@ -31,11 +32,12 @@ export default {
         datasets: [
           {
             label: this.pokemon.name,
-            color: 'green',
+            backgroundColor: this.pokemon.getColorForType(1),
             borderColor: this.pokemon.getColorForType(0.5),
             borderWidth: 5,
-            data: this.pokemon.getStatOrderedArray(),
-            fill: false
+            data: this.limitStats(),
+            fill: false,
+            pointHoverRadius: 8
           }
         ]
       }
@@ -43,14 +45,21 @@ export default {
     chartOptions() {
       return {
         scale: {
+          linear: {
+            display: false
+          },
           ticks: {
             min: 0,
-            max: 200,
-            stepSize: 50,
-            showLabelBackdrop: false
+            max: this.maxTick,
+            stepSize: 30,
+            backdropColor: '#373740'
           },
           gridLines: {
-            display: false
+            display: false,
+            color: 'white'
+          },
+          angleLines: {
+            color: 'rgba(255, 255, 255, 0.12)'
           }
         }
       }
@@ -65,6 +74,14 @@ export default {
   watch: {
     pokemon() {
       this.stats = this.pokemon.getStatsObject()
+    }
+  },
+
+  methods: {
+    limitStats() {
+      return this.pokemon
+        .getStatOrderedArray()
+        .map(stat => (stat >= this.maxTick ? this.maxTick : stat))
     }
   }
 }

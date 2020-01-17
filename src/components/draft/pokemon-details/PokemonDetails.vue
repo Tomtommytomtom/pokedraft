@@ -4,10 +4,7 @@
       <pokemon-container :pokemon="pokemon" />
     </v-row>
     <v-row no-gutters>
-      <v-col> </v-col>
-      <v-col>
-        abilities placeholder
-      </v-col>
+      <v-card-title>{{ pokemon.getAbilityString() }}</v-card-title>
     </v-row>
     <v-row no-gutters>
       <stat-display class="ma-auto" :pokemon="pokemon" />
@@ -38,7 +35,7 @@ export default {
 
   created() {
     console.log('i am now created', this)
-    bus.$on('pokemon-hovered', pokemon => {
+    bus.$on('pokemon-selected', pokemon => {
       console.log('received')
       this.pokemon = pokemon
     })

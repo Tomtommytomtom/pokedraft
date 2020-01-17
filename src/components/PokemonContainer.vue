@@ -1,12 +1,10 @@
 <template>
-  <v-card class="ma-auto" @mouseover="hover">
+  <v-card @mouseover="hover">
     <v-img :src="pokemon.getSprite()" :alt="pokemon.name" height="124px" />
   </v-card>
 </template>
 
 <script>
-import { bus } from '@/main'
-
 export default {
   props: {
     pokemon: {
@@ -21,8 +19,8 @@ export default {
   },
   methods: {
     hover() {
-      console.log('emitted', this.pokemon)
-      bus.$emit('pokemon-hovered', this.pokemon)
+      console.log('in hover inside container')
+      this.$emit('hover', this.pokemon)
     }
   }
 }

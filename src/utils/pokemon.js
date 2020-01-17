@@ -22,8 +22,9 @@ export default class Pokemon {
   getAbilityArray() {
     let abilities = []
     this.abilities.forEach(ability => {
-      abilities.push(ability.name)
+      abilities.push(ability.ability.name)
     })
+    return abilities
   }
 
   getAbilityString() {
