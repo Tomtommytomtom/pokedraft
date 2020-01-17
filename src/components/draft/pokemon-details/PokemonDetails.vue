@@ -4,10 +4,14 @@
       <pokemon-container :pokemon="pokemon" />
       <v-card-title>{{ pokemon.getAbilityString() }}</v-card-title>
     </v-col>
-    <v-spacer></v-spacer>
+    <v-col class="d-flex ma-0 pa-0">
+      <p>
+        metadata, gold, tier, which how to pick, maybe which item its holding
+      </p>
+    </v-col>
     <v-col class="d-flex ma-0 pa-0">
       <stat-display :pokemon="pokemon" />
-      <p>trivia placeholder</p>
+      <trivia-container />
     </v-col>
   </v-container>
 </template>
@@ -16,11 +20,13 @@
 import { bus } from '@/main'
 import StatDisplay from './stats/StatDisplay'
 import PokemonContainer from '@/components/PokemonContainer'
+import TriviaContainer from './trivia/TriviaContainer'
 
 export default {
   components: {
     StatDisplay,
-    PokemonContainer
+    PokemonContainer,
+    TriviaContainer
   },
 
   props: {
