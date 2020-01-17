@@ -1,14 +1,15 @@
 <template>
-  <v-sheet>
-    <v-row no-gutters>
+  <v-container class="d-flex flex-column justify-space-between" fill-height>
+    <v-col class="d-flex ma-0 pa-0">
       <pokemon-container :pokemon="pokemon" />
       <v-card-title>{{ pokemon.getAbilityString() }}</v-card-title>
-    </v-row>
-    <v-row no-gutters>
+    </v-col>
+    <v-spacer></v-spacer>
+    <v-col class="d-flex ma-0 pa-0">
       <stat-display :pokemon="pokemon" />
       <p>trivia placeholder</p>
-    </v-row>
-  </v-sheet>
+    </v-col>
+  </v-container>
 </template>
 
 <script>
