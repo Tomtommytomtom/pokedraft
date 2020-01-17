@@ -5,7 +5,7 @@
       <v-card-title>{{ pokemon.getAbilityString() }}</v-card-title>
     </v-row>
     <v-row no-gutters>
-      <stat-display class="ma-auto" :pokemon="pokemon" />
+      <stat-display :pokemon="pokemon" />
       <p>trivia placeholder</p>
     </v-row>
   </v-sheet>

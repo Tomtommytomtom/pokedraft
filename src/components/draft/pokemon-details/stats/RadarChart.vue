@@ -10,8 +10,8 @@ export default {
       type: Object
     }
   },
+
   mounted() {
-    console.log(this.options)
     this.renderChart(this.chartData, this.options)
   }
 }

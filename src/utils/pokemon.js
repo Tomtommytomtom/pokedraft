@@ -66,6 +66,11 @@ export default class Pokemon {
   getStatLabels() {
     return statOrder.map(stat => statStrings[stat])
   }
+
+  getNameLabel() {
+    const name = this.name
+    return name.toUpperCase()
+  }
 }
 
 const TYPE_STRING_COLOR = {
