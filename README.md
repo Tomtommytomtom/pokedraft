@@ -1,5 +1,7 @@
 # pokedraft
 
+little pokemon drafting game
+
 ## Project setup
 ```
 yarn install
