@@ -37,12 +37,9 @@ export default {
 
   watch: {
     pokemonArrayProp() {
-      console.log('i changed')
       this.pokemonArray = this.pokemonArrayProp
     },
-    pokemonArray() {
-      console.log('i changed too', this.pokemonArray)
-    }
+    pokemonArray() {}
   },
   methods: {
     selectPokemon(pokemon) {

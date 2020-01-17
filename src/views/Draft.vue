@@ -44,33 +44,38 @@ export default {
   },
 
   watch: {
-    pokemonArray() {
-      console.log(this.pokemonArray, 'inside array')
-    }
+    pokemonArray() {}
   },
 
   created() {
-    pokeApiService
-      .getSixPokemon(this.generateSixRandomids())
-      .then(arg => {
-        this.pokemonArray = arg.map(pokemon => new Pokemon(pokemon))
-      })
-      .catch(error => {
-        console.log('there was an error: ', error)
-      })
-
-    bus.$on('pokemon-selected', pokemon => {
-      this.selectedPokemon = pokemon
-    })
+    this.draftSixPokemon()
   },
 
   methods: {
     draftSixPokemon() {
-      console.log('draft here')
+      pokeApiService
+        .getSixPokemon(this.generateSixRandomids())
+        .then(arg => {
+          this.pokemonArray = arg.map(pokemon => new Pokemon(pokemon))
+        })
+        .catch(error => {
+          console.log('there was an error', error)
+        })
+
+      bus.$on('pokemon-selected', pokemon => {
+        this.selectedPokemon = pokemon
+      })
+      bus.$on('pokemon-picked', pokemon => {
+        console.log(pokemon.getNameLabel(), ' was picked')
+        this.draftSixPokemon()
+      })
     },
     generateSixRandomids() {
       let ids = [1, 2, 3, 4, 5, 6]
       return ids.map(() => Math.floor(Math.random() * 806 + 1))
+    },
+    picked() {
+      this.draftSixPokemon()
     }
   }
 }

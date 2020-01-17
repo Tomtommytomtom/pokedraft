@@ -24,7 +24,6 @@ export default {
   },
   methods: {
     hover() {
-      console.log('in hover inside container')
       this.$emit('hover', this.pokemon)
     },
     clicked() {

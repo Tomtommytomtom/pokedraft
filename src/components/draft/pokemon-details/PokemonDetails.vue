@@ -3,6 +3,10 @@
     <v-col class="d-flex ma-0 pa-0">
       <pokemon-container :pokemon="pokemon" />
       <v-card-title>{{ pokemon.getAbilityString() }}</v-card-title>
+      <v-spacer></v-spacer>
+      <v-btn x-large color="primary" class="my-auto mr-3" @click="pick"
+        >PICK</v-btn
+      >
     </v-col>
     <v-col class="d-flex ma-0 pa-0">
       <p>
@@ -40,11 +44,15 @@ export default {
   },
 
   created() {
-    console.log('i am now created', this)
     bus.$on('pokemon-selected', pokemon => {
-      console.log('received')
       this.pokemon = pokemon
     })
+  },
+
+  methods: {
+    pick() {
+      bus.$emit('pokemon-picked', this.pokemon)
+    }
   }
 }
 </script>

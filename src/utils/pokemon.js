@@ -38,7 +38,6 @@ export default class Pokemon {
   }
 
   getSprite() {
-    console.log(this.sprites.front_default)
     return this.sprites.front_default
   }
 
@@ -59,7 +58,6 @@ export default class Pokemon {
   }
 
   getStatOrderedArray() {
-    console.log(statOrder.map(stat => this.getStatsObject()[stat]))
     return statOrder.map(stat => this.getStatsObject()[stat])
   }
 
