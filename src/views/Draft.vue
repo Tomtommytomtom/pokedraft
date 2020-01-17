@@ -70,7 +70,7 @@ export default {
     },
     generateSixRandomids() {
       let ids = [1, 2, 3, 4, 5, 6]
-      return ids.map(() => Math.floor(Math.random() * 801))
+      return ids.map(() => Math.floor(Math.random() * 806 + 1))
     }
   }
 }
