@@ -1,5 +1,5 @@
 <script>
-import PokemonDetails from './pokemon-details/PokemonDetails'
+import PokemonDetails from './PokemonDetails'
 
 export default {
   functional: true,

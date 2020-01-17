@@ -14,8 +14,8 @@
 
 <script>
 import { bus } from '@/main'
-import StatDisplay from '../StatDisplay'
-import PokemonContainer from '../../PokemonContainer'
+import StatDisplay from './stats/StatDisplay'
+import PokemonContainer from '@/components/PokemonContainer'
 
 export default {
   components: {

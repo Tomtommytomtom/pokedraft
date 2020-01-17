@@ -21,7 +21,7 @@
 <script>
 import pokeApiService from '@/apis/pokeApiService'
 import PokemonFooter from '@/components/draft/PokemonFooter'
-import SmartPokemonDetails from '@/components/draft/SmartPokemonDetails'
+import SmartPokemonDetails from '@/components/draft/pokemon-details/SmartPokemonDetails'
 
 import Pokemon from '@/utils/pokemon'
 
