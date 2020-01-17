@@ -1,5 +1,6 @@
 <script>
 import PokemonDetails from './PokemonDetails'
+import EmptyPokemonDetails from './EmptyPokemonDetails'
 
 export default {
   functional: true,
@@ -23,8 +24,7 @@ export default {
         children
       )
     } else {
-      console.log('hey we in this')
-      return h('h1', 'Hover over a Pokemon to')
+      return h(EmptyPokemonDetails)
     }
   }
 }
