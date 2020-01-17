@@ -1,14 +1,11 @@
 <template>
-  <div>
-    <h1>Welcome to Pokedraft</h1>
-    <p>
-      This is were you land and can start the draft. Also look at a view of your
-      past drafts i suppose
-    </p>
-    <v-btn :to="{ name: 'draft' }">
+  <v-container class="d-flex flex-column justify-center align-center">
+    <h1>Welcome</h1>
+    <p>This is where you initially land</p>
+    <v-btn depressed class="primary" :to="{ name: 'draft' }">
       Start the Draft!
     </v-btn>
-  </div>
+  </v-container>
 </template>
 
 <script>
