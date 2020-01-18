@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Draft from '../views/Draft'
+import TeamBuilder from '../views/TeamBuilder'
 
 Vue.use(VueRouter)
 
@@ -24,6 +25,11 @@ const routes = [
     path: '/draft',
     name: 'draft',
     component: Draft
+  },
+  {
+    path: '/builder',
+    name: 'builder',
+    component: TeamBuilder
   }
 ]
 

@@ -29,8 +29,6 @@ import draftingService from '@/utils/draftingService'
 import { bus } from '@/main'
 
 export default {
-  name: 'Home',
-
   components: {
     PokemonFooter,
     SmartPokemonDetails,
@@ -45,9 +43,10 @@ export default {
       pickedPokemonArray: []
     }
   },
-
-  watch: {
-    pokemonArray() {}
+  computed: {
+    hasPickedSixPokemon() {
+      return this.pickedPokemonArray.length === 6
+    }
   },
 
   created() {
@@ -72,6 +71,14 @@ export default {
     },
     picked() {
       this.pickedPokemonArray.push(this.selectedPokemon)
+      console.log(this.pickedPokemonArray, 'inside picked method')
+      if (this.hasPickedSixPokemon) {
+        this.$router.push({
+          name: 'builder',
+          params: { pokemon: this.pickedPokemonArray }
+        })
+        return
+      }
       this.draft()
     }
   }
