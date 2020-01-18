@@ -80,6 +80,10 @@ export default class Pokemon {
     else if (sum >= 400) return 'A'
     else return 'B'
   }
+
+  getHeldItemName() {
+    return this.heldItem.name
+  }
 }
 
 const TYPE_STRING_COLOR = {
