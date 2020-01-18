@@ -4,11 +4,11 @@
     class="d-flex flex-column justify-space-around"
     fill-height
   >
-    <pokemon-container
+    <base-pokemon-container
       v-for="pokemon in pickedPokemonArray"
       :key="pokemon.id"
       :pokemon="pokemon"
-    ></pokemon-container>
+    />
   </v-container>
   <div v-else>
     <p>nothing picked yet</p>
@@ -17,11 +17,7 @@
 
 <script>
 //replace pokemon-container with something better
-import PokemonContainer from '../PokemonContainer'
 export default {
-  components: {
-    PokemonContainer
-  },
   props: {
     pickedPokemonArray: {
       type: Array
