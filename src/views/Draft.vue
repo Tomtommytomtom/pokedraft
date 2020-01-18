@@ -21,12 +21,10 @@
 </template>
 
 <script>
-import pokeApiService from '@/apis/pokeApiService'
 import PokemonFooter from '@/components/draft/PokemonFooter'
 import SmartPokemonDetails from '@/components/draft/pokemon-details/SmartPokemonDetails'
 import TeamSideBar from '@/components/draft/TeamSideBar'
-
-import Pokemon from '@/utils/pokemon'
+import draftingService from '@/utils/draftingService'
 
 import { bus } from '@/main'
 
@@ -53,7 +51,7 @@ export default {
   },
 
   created() {
-    this.draftSixPokemon()
+    this.draft()
     bus.$on('pokemon-selected', pokemon => {
       this.selectedPokemon = pokemon
     })
@@ -64,26 +62,17 @@ export default {
   },
 
   methods: {
-    draftSixPokemon() {
+    draft() {
       this.pokemonArray = []
       this.selectedPokemon = null
-      pokeApiService
-        .getSixPokemon(this.generateSixRandomids())
-        .then(arg => {
-          this.pokemonArray = arg.map(pokemon => new Pokemon(pokemon))
-        })
-        .catch(error => {
-          console.log('there was an error', error)
-        })
+      draftingService.draftSixPokemonAnd(this.saveIntoPokemonArray)
     },
-    generateSixRandomids() {
-      let ids = [1, 2, 3, 4, 5, 6]
-      return ids.map(() => Math.floor(Math.random() * 806 + 1))
+    saveIntoPokemonArray(draftedPokemon) {
+      this.pokemonArray = draftedPokemon
     },
     picked() {
       this.pickedPokemonArray.push(this.selectedPokemon)
-      console.log(this.pickedPokemonArray)
-      this.draftSixPokemon()
+      this.draft()
     }
   }
 }
