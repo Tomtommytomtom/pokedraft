@@ -24,29 +24,28 @@ export default {
     value: {
       type: Object
     },
-    pokemonArrayProp: {
+    draftedPokemonArray: {
       type: Array
     }
   },
 
   data() {
     return {
-      pokemonArray: this.pokemonArrayProp
+      pokemonArray: this.draftedPokemonArray
     }
   },
 
   watch: {
-    pokemonArrayProp() {
-      this.pokemonArray = this.pokemonArrayProp
-    },
-    pokemonArray() {}
+    draftedPokemonArray() {
+      this.pokemonArray = this.draftedPokemonArray
+    }
   },
   methods: {
     selectPokemon(pokemon) {
       bus.$emit('pokemon-selected', pokemon)
     },
     pickPokemon(pokemon) {
-      bus.$emit('pokemon-picked', pokemon)
+      bus.$emit('pokemon-drafted', pokemon)
     }
   }
 }
