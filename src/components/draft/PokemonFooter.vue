@@ -5,6 +5,7 @@
       :key="pokemon.id"
       :pokemon="pokemon"
       class="ma-auto"
+      :focused="focused[pokemonArray.indexOf(pokemon)]"
       @click="selectPokemon"
     />
   </v-sheet>
@@ -28,10 +29,10 @@ export default {
       type: Array
     }
   },
-
   data() {
     return {
-      pokemonArray: this.draftedPokemonArray
+      pokemonArray: this.draftedPokemonArray,
+      focused: [false, false, false, false, false, false]
     }
   },
 
@@ -40,12 +41,19 @@ export default {
       this.pokemonArray = this.draftedPokemonArray
     }
   },
+  created() {
+    bus.$on('pokemon-picked', () => {
+      console.log('hey')
+      this.focused.fill(false)
+    })
+  },
+
   methods: {
     selectPokemon(pokemon) {
+      this.focused.fill(false)
+      this.$set(this.focused, this.pokemonArray.indexOf(pokemon), true)
       bus.$emit('pokemon-selected', pokemon)
-    },
-    pickPokemon(pokemon) {
-      bus.$emit('pokemon-drafted', pokemon)
+      console.log(this.focused)
     }
   }
 }

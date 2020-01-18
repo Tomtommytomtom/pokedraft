@@ -1,9 +1,10 @@
 <template>
   <v-card
+    :elevation="elevation"
     width="124px"
-    style="border-radius: 3px; border: solid rgba(255,255,255,0.1) 1px"
-    @mouseover="hover"
     @click="clicked"
+    @mouseenter="borderFlash = false"
+    @mouseleave="borderFlash = false"
   >
     <v-img :src="pokemon.getSprite()" :alt="pokemon.name" height="124px" />
   </v-card>
@@ -14,18 +15,27 @@ export default {
   props: {
     pokemon: {
       type: Object
+    },
+    focused: {
+      type: Boolean
     }
   },
 
   data() {
     return {
-      pokemonData: this.pokemon
+      pokemonData: this.pokemon,
+      borderStyle: {
+        border: 'solid green 8px'
+      },
+      borderFlash: false
+    }
+  },
+  computed: {
+    elevation() {
+      return this.focused ? 8 : 2
     }
   },
   methods: {
-    hover() {
-      this.$emit('hover', this.pokemon)
-    },
     clicked() {
       this.$emit('click', this.pokemon)
     }
