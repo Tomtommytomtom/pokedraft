@@ -3,7 +3,9 @@
     <v-sheet height="80%">
       <v-container fluid fill-height class="align-stretch ma-0 pa-0">
         <v-row no-gutters>
-          <v-col cols="2">team</v-col>
+          <v-col cols="2"
+            ><team-side-bar :picked-pokemon-array="pickedPokemonArray"
+          /></v-col>
           <v-divider vertical light />
           <v-col cols="7"
             ><smart-pokemon-details :local-pokemon="selectedPokemon"
@@ -14,7 +16,7 @@
       </v-container>
     </v-sheet>
     <v-divider light />
-    <pokemon-footer :pokemon-array-prop="pokemonArray" />
+    <pokemon-footer :drafted-pokemon-array="pokemonArray" />
   </v-sheet>
 </template>
 
@@ -22,6 +24,7 @@
 import pokeApiService from '@/apis/pokeApiService'
 import PokemonFooter from '@/components/draft/PokemonFooter'
 import SmartPokemonDetails from '@/components/draft/pokemon-details/SmartPokemonDetails'
+import TeamSideBar from '@/components/draft/TeamSideBar'
 
 import Pokemon from '@/utils/pokemon'
 
@@ -32,14 +35,16 @@ export default {
 
   components: {
     PokemonFooter,
-    SmartPokemonDetails
+    SmartPokemonDetails,
+    TeamSideBar
   },
 
   data() {
     return {
       pokemon: {},
       pokemonArray: [],
-      selectedPokemon: undefined
+      selectedPokemon: undefined,
+      pickedPokemonArray: []
     }
   },
 
@@ -54,7 +59,7 @@ export default {
     })
     bus.$on('pokemon-picked', pokemon => {
       console.log(pokemon.getNameLabel(), ' was picked')
-      this.draftSixPokemon()
+      this.picked()
     })
   },
 
@@ -76,6 +81,8 @@ export default {
       return ids.map(() => Math.floor(Math.random() * 806 + 1))
     },
     picked() {
+      this.pickedPokemonArray.push(this.selectedPokemon)
+      console.log(this.pickedPokemonArray)
       this.draftSixPokemon()
     }
   }
