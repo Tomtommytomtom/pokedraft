@@ -9,9 +9,7 @@
       >
     </v-col>
     <v-col class="d-flex ma-0 pa-0">
-      <p>
-        metadata, gold, tier, which how to pick, maybe which item its holding
-      </p>
+      <p>{{ pokemon.getTier() }}, {{ pokemon.getHeldItemName() }}</p>
     </v-col>
     <v-col class="d-flex ma-0 pa-0">
       <stat-display :pokemon="pokemon" />
