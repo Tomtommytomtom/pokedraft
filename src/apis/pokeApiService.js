@@ -13,8 +13,29 @@ const getPokemon = id => {
   return apiClient.get(`/pokemon/${id}`).then(response => response.data)
 }
 
+const getItem = id => {
+  console.log(id)
+  return apiClient.get(`/item-category/1`).then(response => response.data)
+}
+
+const getPokemonAndItem = id => {
+  return [getPokemon(id), getItem(id)]
+}
+
 const getSixPokemon = arrayOfIds => {
-  return axios.all(arrayOfIds.map(id => getPokemon(id)))
+  return axios
+    .all(arrayOfIds.map(id => getPokemonAndItem(id)).flat(1))
+    .then(res => {
+      let result = []
+      for (let i = 0; i < res.length; i = i + 2) {
+        result.push({
+          pokemon: res[i],
+          item: res[i + 1]
+        })
+      }
+      console.log(result)
+      return result
+    })
 }
 
 export default {

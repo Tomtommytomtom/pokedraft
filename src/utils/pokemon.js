@@ -1,13 +1,16 @@
 import { convertRgbToRgbAlpha } from './colorStringOperations'
+import Item from './itemCategory'
 
 export default class Pokemon {
-  constructor({ name, id, stats, abilities, sprites, types }) {
+  constructor({ name, id, stats, abilities, sprites, types }, heldItem) {
     this.name = name
     this.id = id
     this.statInfo = stats
     this.abilities = abilities
     this.sprites = sprites
     this.types = types
+    this.heldItem = new Item(heldItem)
+    console.log(this.heldItem)
   }
 
   getStatsObject() {
@@ -32,7 +35,7 @@ export default class Pokemon {
   }
 
   getSumOfStats() {
-    return Object.values(this.getStatsObject).reduce((acc, curr) => {
+    return Object.values(this.getStatsObject()).reduce((acc, curr) => {
       return acc + curr
     }, 0)
   }
@@ -68,6 +71,14 @@ export default class Pokemon {
   getNameLabel() {
     const name = this.name
     return name.toUpperCase()
+  }
+
+  getTier() {
+    const sum = this.getSumOfStats()
+    console.log(sum)
+    if (sum >= 600) return 'S'
+    else if (sum >= 400) return 'A'
+    else return 'B'
   }
 }
 
