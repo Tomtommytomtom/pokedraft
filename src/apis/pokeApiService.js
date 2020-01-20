@@ -63,6 +63,19 @@ const getEvolutionChainForArrayOfPokemon = arrayOfPokemon => {
   return axios.all(arrayOfPokemon.map(pokemon => getEvolutionChain(pokemon)))
 }
 
+//down from here are okayish, up is trash
+
+const getEvolutionsFromArrayOfPokemon = array => {
+  return axios.all(array.map(pokemon => getEvolutionsFromPokemon(pokemon)))
+}
+
+const getEvolutionsFromPokemon = pokemon => {
+  return getEvolutionChain(pokemon)
+    .then(chain => reduceChainToIds(chain))
+    .then(nestedIds => nestedIds.flat(1))
+    .then(ids => getPokemonFromArrayOfIds(ids))
+}
+
 const getEvolutionChain = pokemon => {
   return axios
     .get(pokemon.speciesUrl)
@@ -94,5 +107,6 @@ const extractIdFromLink = link => {
 export default {
   getPokemon,
   getSixPokemon,
-  getEvolutionArray
+  getEvolutionArray,
+  getEvolutionsFromArrayOfPokemon
 }
