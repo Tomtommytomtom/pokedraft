@@ -76,13 +76,24 @@ export default class Pokemon {
   getTier() {
     const sum = this.getSumOfStats()
     console.log(sum)
-    if (sum >= 600) return 'S'
+    if (sum > 600) return 'S'
     else if (sum >= 400) return 'A'
     else return 'B'
   }
 
   getHeldItemName() {
+    console.log(this.heldItem.name)
     return this.heldItem.name
+      .split('-')
+      .map(name => name.toUpperCase())
+      .join(' ')
+  }
+
+  toSmogonString() {
+    return [
+      `${this.name} @ ${this.getHeldItemName()}`,
+      `Ability: ${this.getAbilityArray()[0].toUpperCase()}`
+    ]
   }
 }
 
