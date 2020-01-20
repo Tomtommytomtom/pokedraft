@@ -1,4 +1,5 @@
 import axios from 'axios'
+import item from '@/utils/itemIdGeneration.js'
 
 const apiClient = axios.create({
   baseURL: 'https://pokeapi.co/api/v2/',
@@ -15,7 +16,9 @@ const getPokemon = id => {
 
 const getItem = id => {
   console.log(id)
-  return apiClient.get(`/item-category/1`).then(response => response.data)
+  return apiClient
+    .get(`/item-category/${item.getRandomItemCategory()}`)
+    .then(response => response.data)
 }
 
 const getPokemonAndItem = id => {
