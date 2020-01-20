@@ -25,7 +25,6 @@ export default {
     }
   },
   created() {
-    //pokeApiService.getEvolutionArray(this.pokemons, this.addEvos)
     pokeApiService
       .getEvolutionsFromArrayOfPokemon(this.pokemons)
       .then(arrayOfEvos =>

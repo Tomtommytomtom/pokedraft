@@ -45,26 +45,6 @@ const getSixPokemon = arrayOfIds => {
     })
 }
 
-const getEvolutionArray = (arrayOfPokemon, fn) => {
-  return getEvolutionIds(arrayOfPokemon).then(idsArray =>
-    idsArray.map((ids, index) =>
-      getPokemonFromArrayOfIds(ids).then(pokemons => fn(index, pokemons))
-    )
-  )
-}
-
-const getEvolutionIds = arrayOfPokemon => {
-  return getEvolutionChainForArrayOfPokemon(arrayOfPokemon)
-    .then(res => res.map(pokemon => reduceChainToIds(pokemon)))
-    .then(ids => ids.map(id => id.flat(1)))
-}
-
-const getEvolutionChainForArrayOfPokemon = arrayOfPokemon => {
-  return axios.all(arrayOfPokemon.map(pokemon => getEvolutionChain(pokemon)))
-}
-
-//down from here are okayish, up is trash
-
 const getEvolutionsFromArrayOfPokemon = array => {
   return axios.all(array.map(pokemon => getEvolutionsFromPokemon(pokemon)))
 }
@@ -107,6 +87,5 @@ const extractIdFromLink = link => {
 export default {
   getPokemon,
   getSixPokemon,
-  getEvolutionArray,
   getEvolutionsFromArrayOfPokemon
 }
