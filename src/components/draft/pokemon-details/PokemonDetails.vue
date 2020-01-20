@@ -1,7 +1,7 @@
 <template>
   <v-container class="d-flex flex-column justify-space-between" fill-height>
     <v-col class="d-flex ma-0 pa-0">
-      <pokemon-container :pokemon="pokemon" />
+      <base-pokemon-container :pokemon="pokemon" />
       <v-card-title>{{ pokemon.getAbilityString() }}</v-card-title>
       <v-spacer></v-spacer>
       <v-btn x-large color="primary" class="my-auto mr-3" @click="pick"
@@ -21,13 +21,11 @@
 <script>
 import { bus } from '@/main'
 import StatDisplay from './stats/StatDisplay'
-import PokemonContainer from '@/components/PokemonContainer'
 import TriviaContainer from './trivia/TriviaContainer'
 
 export default {
   components: {
     StatDisplay,
-    PokemonContainer,
     TriviaContainer
   },
 
