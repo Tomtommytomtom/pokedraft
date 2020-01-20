@@ -2,7 +2,10 @@ import { convertRgbToRgbAlpha } from './colorStringOperations'
 import Item from './itemCategory'
 
 export default class Pokemon {
-  constructor({ name, id, stats, abilities, sprites, types }, heldItem) {
+  constructor(
+    { name, id, stats, abilities, sprites, types, species },
+    heldItem
+  ) {
     this.name = name
     this.id = id
     this.statInfo = stats
@@ -10,6 +13,7 @@ export default class Pokemon {
     this.sprites = sprites
     this.types = types
     this.heldItem = new Item(heldItem)
+    this.speciesUrl = species.url
     console.log(this.heldItem)
   }
 
@@ -94,6 +98,15 @@ export default class Pokemon {
       `${this.name} @ ${this.getHeldItemName()}`,
       `Ability: ${this.getAbilityArray()[0].toUpperCase()}`
     ]
+  }
+
+  addEvolutions(arrayOfPokemon) {
+    console.log('add evo calles', arrayOfPokemon)
+    this.evolutions = arrayOfPokemon.filter(pokemon => pokemon.id !== this.id)
+  }
+
+  hasEvolutions() {
+    return !!this.evolutions
   }
 }
 
