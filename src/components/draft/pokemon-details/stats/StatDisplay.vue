@@ -50,6 +50,7 @@ export default {
     },
     chartOptions() {
       return {
+        tooltips: this.tooltips,
         legend: this.legend,
         scale: {
           linear: this.linear,
@@ -57,6 +58,20 @@ export default {
           gridLines: this.gridLines,
           angleLines: this.angleLines,
           pointLabels: this.pointLabels
+        }
+      }
+    },
+    tooltips() {
+      return {
+        enabled: true,
+        callbacks: {
+          title: (tooltips, data) => {
+            const tooltip = tooltips[0]
+            return data.labels[tooltip.index]
+          },
+          label: tooltip => {
+            return `${this.originalStats()[tooltip.index]}`
+          }
         }
       }
     },
@@ -117,6 +132,9 @@ export default {
       return this.pokemon
         .getStatOrderedArray()
         .map(stat => (stat >= this.maxTick ? this.maxTick : stat))
+    },
+    originalStats() {
+      return this.pokemon.getStatOrderedArray()
     }
   }
 }
