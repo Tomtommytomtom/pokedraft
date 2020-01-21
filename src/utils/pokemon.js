@@ -102,11 +102,17 @@ export default class Pokemon {
 
   addEvolutions(arrayOfPokemon) {
     console.log('add evo calles', arrayOfPokemon)
-    this.evolutions = arrayOfPokemon.filter(pokemon => pokemon.id !== this.id)
+    this.evolutions = arrayOfPokemon
   }
 
   hasEvolutions() {
     return !!this.evolutions
+  }
+
+  evolveInto(pokemon) {
+    if (this.evolutions.includes(pokemon) && this.hasEvolutions()) {
+      Object.assign(this, pokemon)
+    }
   }
 }
 
