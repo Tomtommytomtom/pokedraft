@@ -1,23 +1,30 @@
 <template>
   <div>
-    <div class="d-flex">
-      <base-pokemon-container
+    <v-container fluid fill-width class="d-flex" fill-height>
+      <div
         v-for="pokemon in pokemons"
         :key="pokemon.id"
-        :pokemon="pokemon"
-      />
-    </div>
+        fill-height
+        class="d-flex justify-space-between"
+      >
+        <v-divider vertical light />
+        <build-container :pokemon="pokemon" />
+      </div>
+      <v-divider vertical light />
+    </v-container>
     <smogon-string-field :pokemons="pokemons" />
   </div>
 </template>
 
 <script>
 import pokeApiService from '@/apis/pokeApiService.js'
+import BuildContainer from '@/components/builder/BuildContainer'
 import SmogonStringField from '@/components/smogon-string-field/SmogonStringField.vue'
 
 export default {
   components: {
-    SmogonStringField
+    SmogonStringField,
+    BuildContainer
   },
   data() {
     return {
