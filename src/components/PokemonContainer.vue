@@ -1,11 +1,10 @@
 <template>
   <v-card
+    ripple
     width="124px"
     style="border-radius: 100px"
     :style="elevation"
-    @click="clicked"
-    @mouseenter="borderFlash = false"
-    @mouseleave="borderFlash = false"
+    @click.native="clicked"
   >
     <v-img
       :src="require(`../assets/pokeball_${pokemon.getTier()}.png`)"
