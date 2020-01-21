@@ -40,7 +40,7 @@ const getSixPokemon = arrayOfIds => {
           item: res[i + 1]
         })
       }
-      console.log(result)
+
       return result
     })
 }
@@ -74,7 +74,7 @@ const reduceChainToIds = chain => {
     resultArray.push(extractIdFromLink(currentEvo.evolves_to))
     currentEvo = currentEvo.evolves_to[0]
   }
-  console.log(resultArray)
+
   return resultArray
 }
 

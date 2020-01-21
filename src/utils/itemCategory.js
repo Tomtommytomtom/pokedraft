@@ -1,6 +1,5 @@
 export default class Item {
   constructor({ items }) {
-    console.log(items)
     this.item = getRandomItemOutOfArray(items)
     this.name = this.item.name
   }

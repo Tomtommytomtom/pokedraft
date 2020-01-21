@@ -54,8 +54,7 @@ export default {
     bus.$on('pokemon-selected', pokemon => {
       this.selectedPokemon = pokemon
     })
-    bus.$on('pokemon-picked', pokemon => {
-      console.log(pokemon.getNameLabel(), ' was picked')
+    bus.$on('pokemon-picked', () => {
       this.picked()
     })
   },
@@ -71,7 +70,7 @@ export default {
     },
     picked() {
       this.pickedPokemonArray.push(this.selectedPokemon)
-      console.log(this.pickedPokemonArray, 'inside picked method')
+
       if (this.hasPickedSixPokemon) {
         this.$router.push({
           name: 'builder',

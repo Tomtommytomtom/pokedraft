@@ -43,7 +43,6 @@ export default {
   },
   created() {
     bus.$on('pokemon-picked', () => {
-      console.log('hey')
       this.focused.fill(false)
     })
   },
@@ -53,7 +52,6 @@ export default {
       this.focused.fill(false)
       this.$set(this.focused, this.pokemonArray.indexOf(pokemon), true)
       bus.$emit('pokemon-selected', pokemon)
-      console.log(this.focused)
     }
   }
 }

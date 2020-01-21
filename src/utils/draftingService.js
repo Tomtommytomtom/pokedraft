@@ -11,7 +11,7 @@ const draftSixPokemonAnd = fn => {
       fn(draftedPokemon)
     })
     .catch(error => {
-      console.log('there was an error', error)
+      console.log(error)
     })
 }
 

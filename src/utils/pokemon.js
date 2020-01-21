@@ -14,7 +14,6 @@ export default class Pokemon {
     this.types = types
     this.heldItem = new Item(heldItem)
     this.speciesUrl = species.url
-    console.log(this.heldItem)
   }
 
   getStatsObject() {
@@ -79,14 +78,13 @@ export default class Pokemon {
 
   getTier() {
     const sum = this.getSumOfStats()
-    console.log(sum)
+
     if (sum > 600) return 'S'
     else if (sum >= 400) return 'A'
     else return 'B'
   }
 
   getHeldItemName() {
-    console.log(this.heldItem.name)
     return this.heldItem.name
       .split('-')
       .map(name => name.toUpperCase())
@@ -101,7 +99,6 @@ export default class Pokemon {
   }
 
   addEvolutions(arrayOfPokemon) {
-    console.log('add evo calles', arrayOfPokemon)
     this.evolutions = arrayOfPokemon
   }
 
