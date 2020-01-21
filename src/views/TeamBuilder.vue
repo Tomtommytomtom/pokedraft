@@ -35,7 +35,9 @@ export default {
   methods: {
     addEvos(evos, index) {
       this.pokemons[index].addEvolutions(evos)
-      this.$set(this.pokemons, index, this.pokemons[index])
+    },
+    evolve() {
+      this.pokemons[2].evolveInto(this.pokemons[2].evolutions[0])
     }
   }
 }
