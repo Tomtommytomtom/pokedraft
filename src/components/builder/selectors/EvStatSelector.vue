@@ -6,7 +6,6 @@
       :value="evs[n - 1]"
       :index="n - 1"
       :label="labels[n - 1]"
-      :cap-trigger="capTrigger[n - 1]"
       @input="evSelected"
     ></single-ev-selector>
     <p>{{ sum }}/{{ max }} EVS</p>
@@ -22,12 +21,14 @@ export default {
   props: {
     labels: {
       type: Array
+    },
+    value: {
+      type: Array
     }
   },
   data() {
     return {
-      evs: [0, 0, 0, 0, 0, 0],
-      capTrigger: [false, false, false, false, false, false],
+      evs: this.value,
       max: 508
     }
   },
@@ -41,6 +42,11 @@ export default {
       return this.max - this.sum >= 252 ? 252 : this.max - this.sum
     }
   },
+  watch: {
+    value() {
+      this.evs = this.value
+    }
+  },
   methods: {
     recalc(n) {
       console.log('recalcing', this.labels[n])
@@ -50,7 +56,6 @@ export default {
       this.recalc(index)
       if (value > this.capValue) {
         console.log('dingdingdgin', this.capValue, index)
-        this.$set(this.capTrigger, index, !this.capTrigger[index])
         this.$set(this.evs, index, this.capValue)
       } else {
         this.$set(this.evs, index, value)
