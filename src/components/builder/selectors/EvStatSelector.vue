@@ -3,12 +3,13 @@
     <single-ev-selector
       v-for="n in 6"
       :key="n - 1"
+      :value="evs[n - 1]"
       :index="n - 1"
-      :input="evSelected"
       :label="labels[n - 1]"
-      :current-cap="capValue"
+      :cap-trigger="capTrigger[n - 1]"
+      @input="evSelected"
     ></single-ev-selector>
-    <p>{{ evs }},{{ sum }},{{ capValue }}</p>
+    <p>{{ sum }}/{{ max }} EVS</p>
   </div>
 </template>
 
@@ -26,7 +27,8 @@ export default {
   data() {
     return {
       evs: [0, 0, 0, 0, 0, 0],
-      max: 510
+      capTrigger: [false, false, false, false, false, false],
+      max: 508
     }
   },
   computed: {
@@ -44,8 +46,15 @@ export default {
       console.log('recalcing', this.labels[n])
       this.$set(this.evs, n, 0)
     },
-    evSelected(index, value) {
-      console.log(index, value)
+    evSelected({ index, value }) {
+      this.recalc(index)
+      if (value > this.capValue) {
+        console.log('dingdingdgin', this.capValue, index)
+        this.$set(this.capTrigger, index, !this.capTrigger[index])
+        this.$set(this.evs, index, this.capValue)
+      } else {
+        this.$set(this.evs, index, value)
+      }
     }
   }
 }
