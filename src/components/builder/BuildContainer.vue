@@ -1,6 +1,5 @@
 <template>
   <div class="d-flex flex-column" fill-height height="100%">
-    <base-pokemon-container :pokemon="pokemon" />
     <ability-selector
       v-model="pokemon.selectedAbility"
       :abilities="pokemon.getAbilityArray()"
