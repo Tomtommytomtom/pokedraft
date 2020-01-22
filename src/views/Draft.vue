@@ -11,7 +11,7 @@
             ><smart-pokemon-details :local-pokemon="selectedPokemon"
           /></v-col>
           <v-divider vertical light />
-          <v-col>shop</v-col>
+          <v-col>other info</v-col>
         </v-row>
       </v-container>
     </v-sheet>

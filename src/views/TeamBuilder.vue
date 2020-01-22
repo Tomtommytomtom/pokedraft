@@ -1,14 +1,15 @@
 <template>
-  <div>
+  <div class="d-flex">
     <v-container fluid fill-width class="d-flex" fill-height>
-      <div
+      <base-pokemon-container
         v-for="pokemon in pokemons"
         :key="pokemon.id"
-        fill-height
-        class="d-flex justify-space-between"
-      >
+        :pokemon="pokemon"
+        @click.native="selectedPokemon = pokemon"
+      />
+      <div fill-height class="d-flex justify-space-between">
         <v-divider vertical light />
-        <build-container :pokemon="pokemon" />
+        <build-container :value="selectedPokemon" />
       </div>
       <v-divider vertical light />
     </v-container>
@@ -28,7 +29,8 @@ export default {
   },
   data() {
     return {
-      pokemons: this.$route.params.pokemon
+      pokemons: this.$route.params.pokemon,
+      selectedPokemon: this.$route.params.pokemon[0]
     }
   },
   created() {
@@ -40,6 +42,9 @@ export default {
   },
 
   methods: {
+    select(n) {
+      console.log('clicked', n)
+    },
     addEvos(evos, index) {
       this.pokemons[index].addEvolutions(evos)
     },

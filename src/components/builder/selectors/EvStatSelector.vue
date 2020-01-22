@@ -55,6 +55,7 @@ export default {
       } else {
         this.$set(this.evs, index, value)
       }
+      this.$emit('input', this.evs)
     }
   }
 }

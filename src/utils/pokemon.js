@@ -14,6 +14,9 @@ export default class Pokemon {
     this.types = types
     this.heldItem = new Item(heldItem)
     this.speciesUrl = species.url
+    this.selectedAbility = this.getAbilityArray()[0]
+    this.nature = randomNature()
+    this.evs = [0, 0, 0, 0, 0, 0]
   }
 
   getStatsObject() {
@@ -94,7 +97,7 @@ export default class Pokemon {
   toSmogonString() {
     return [
       `${this.name} @ ${this.getHeldItemName()}`,
-      `Ability: ${this.getAbilityArray()[0].toUpperCase()}`
+      `Ability: ${this.selectedAbility.toUpperCase()}`
     ]
   }
 
@@ -151,3 +154,36 @@ const statOrder = [
   'special-defense',
   'special-attack'
 ]
+
+const natures = [
+  'hardy',
+  'lonely',
+  'brave',
+  'adamant',
+  'naughty',
+  'bold',
+  'docile',
+  'relaxed',
+  'impish',
+  'lax',
+  'timid',
+  'hasty',
+  'serious',
+  'jolly',
+  'naive',
+  'modest',
+  'mild',
+  'quiet',
+  'bashful',
+  'rash',
+  'calm',
+  'gentle',
+  'sassy',
+  'careful',
+  'quirky'
+]
+
+const randomNature = () => {
+  const randIndex = Math.floor(Math.random() * natures.length)
+  return natures[randIndex]
+}
