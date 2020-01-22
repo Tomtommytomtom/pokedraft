@@ -97,8 +97,18 @@ export default class Pokemon {
   toSmogonString() {
     return [
       `${this.name} @ ${this.getHeldItemName()}`,
-      `Ability: ${this.selectedAbility.toUpperCase()}`
+      `Ability: ${this.selectedAbility.toUpperCase()}`,
+      `EVs: ${this.getEvString()}`
     ]
+  }
+
+  getEvString() {
+    return this.evs
+      .map((ev, index) =>
+        ev ? `${ev} ${smogonStatStrings[statOrder[index]]}` : ''
+      )
+      .filter(ev => !!ev)
+      .join(' / ')
   }
 
   addEvolutions(arrayOfPokemon) {
@@ -144,6 +154,15 @@ const statStrings = {
   'special-attack': 'SPATK',
   'special-defense': 'SPDEF',
   speed: 'SPEED'
+}
+
+const smogonStatStrings = {
+  hp: 'HP',
+  attack: 'Atk',
+  defense: 'Def',
+  'special-attack': 'SpA',
+  'special-defense': 'SpD',
+  speed: 'Spe'
 }
 
 const statOrder = [
