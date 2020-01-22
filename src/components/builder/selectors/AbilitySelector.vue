@@ -20,12 +20,17 @@ export default {
   },
   data() {
     return {
-      selectedAbility: this.abilities[0]
+      selectedAbility: this.value
     }
   },
   computed: {
     hasOnlyOneAbility() {
       return this.abilities.length === 1
+    }
+  },
+  watch: {
+    value() {
+      this.selectedAbility = this.value
     }
   },
   methods: {
