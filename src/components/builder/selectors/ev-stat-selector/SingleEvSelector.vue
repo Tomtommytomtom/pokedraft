@@ -84,6 +84,7 @@ export default {
         console.log(number, number % 4)
         this.textValue = number - (number % 4)
       }
+      this.textValue = Number(this.textValue)
     }
   }
 }
