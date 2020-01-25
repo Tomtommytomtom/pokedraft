@@ -4,7 +4,8 @@
       v-model="pokemon.selectedAbility"
       :abilities="pokemon.getAbilityArray()"
     />
-    <item-selector></item-selector>
+    <item-selector :index="index" :item-array="itemArray" />
+    <v-btn @click="log">EVOLVE ME</v-btn>
     <nature-selector v-model="pokemon.nature"></nature-selector>
     <ev-stat-selector
       v-model="pokemon.evs"
@@ -30,6 +31,12 @@ export default {
   props: {
     value: {
       type: Object
+    },
+    itemArray: {
+      type: Array
+    },
+    index: {
+      type: Number
     }
   },
   data() {
@@ -44,6 +51,13 @@ export default {
     },
     pokemon() {
       console.log('i changed')
+    }
+  },
+  methods: {
+    log() {
+      console.log(this.pokemon)
+      this.pokemon.logEvolutionNamesWithIndex()
+      this.pokemon.evolveOneStage()
     }
   }
 }

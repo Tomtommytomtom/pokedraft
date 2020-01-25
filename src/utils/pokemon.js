@@ -17,6 +17,7 @@ export default class Pokemon {
     this.selectedAbility = this.getAbilityArray()[0]
     this.nature = randomNature()
     this.evs = [0, 0, 0, 0, 0, 0]
+    this.evolutions = null
   }
 
   getStatsObject() {
@@ -119,10 +120,24 @@ export default class Pokemon {
     return !!this.evolutions
   }
 
+  logEvolutionNamesWithIndex() {
+    console.log(
+      this.evolutions.map((evo, index) => `name: ${evo.name}, index:${index}`)
+    )
+  }
+
   evolveInto(pokemon) {
     if (this.evolutions.includes(pokemon) && this.hasEvolutions()) {
       Object.assign(this, pokemon)
     }
+  }
+
+  evolveOneStage() {
+    const evolutionNames = this.evolutions.map(evo => evo.name)
+    const currStage = evolutionNames.indexOf(this.name)
+    const max = this.evolutions.length
+    console.log(currStage, max)
+    this.evolveInto(this.evolutions)
   }
 }
 
