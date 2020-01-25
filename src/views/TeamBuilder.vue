@@ -28,6 +28,7 @@ import pokeApiService from '@/apis/pokeApiService.js'
 import BuildContainer from '@/components/builder/BuildContainer'
 import SmogonStringField from '@/components/smogon-string-field/SmogonStringField.vue'
 import Pokemon from '@/utils/pokemon.js'
+import { bus } from '@/main.js'
 
 const getFromLocalStorage = function() {
   if (localStorage.getItem('stored_pokemon')) {
@@ -51,18 +52,20 @@ export default {
   },
 
   computed: {
-    itemArray: {
-      get() {
-        return this.pokemons.map((pokemon, index) => {
-          return { item: pokemon.heldItem, index }
-        })
-      },
-      set({ item, index }) {
-        console.log(item, index)
-      }
+    itemArray() {
+      return this.pokemons.map((pokemon, index) => {
+        return { item: pokemon.heldItem, index }
+      })
+    }
+  },
+
+  watch: {
+    pokemons() {
+      console.log('ah yes we changed')
     }
   },
   created() {
+    bus.$on('swap-items', this.swapItems)
     if (!this.pokemons) {
       this.pokemons = getFromLocalStorage()
       this.selectedPokemon = this.pokemons[0]
@@ -77,6 +80,23 @@ export default {
   },
 
   methods: {
+    swapItems({ pokemonToStealFrom, pokemonToGiveTo }) {
+      const take = this.pokemons[pokemonToStealFrom].heldItem
+      const give = this.pokemons[pokemonToGiveTo].heldItem
+
+      this.pokemons[pokemonToStealFrom].heldItem = give
+      this.pokemons[pokemonToGiveTo].heldItem = take
+
+      console.log(pokemonToStealFrom, pokemonToGiveTo)
+
+      this.$set(
+        this.pokemons,
+        pokemonToStealFrom,
+        this.pokemons[pokemonToStealFrom]
+      )
+      this.$set(this.pokemons, pokemonToGiveTo, this.pokemons[pokemonToGiveTo])
+      console.log(this.pokemons)
+    },
     select(n) {
       console.log('clicked', n)
     },
