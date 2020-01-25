@@ -5,7 +5,7 @@
       :abilities="pokemon.getAbilityArray()"
     />
     <item-selector :index="index" :item-array="itemArray" />
-    <v-btn @click="log">EVOLVE ME</v-btn>
+    <evolution-container :evolutions="pokemon.evolutions"></evolution-container>
     <nature-selector v-model="pokemon.nature"></nature-selector>
     <ev-stat-selector
       v-model="pokemon.evs"
@@ -20,13 +20,15 @@ import AbilitySelector from './selectors/AbilitySelector'
 import ItemSelector from './selectors/ItemSelector'
 import NatureSelector from './selectors/NatureSelector'
 import EvStatSelector from './selectors/EvStatSelector'
+import EvolutionContainer from './selectors/EvolutionContainer'
 
 export default {
   components: {
     AbilitySelector,
     ItemSelector,
     NatureSelector,
-    EvStatSelector
+    EvStatSelector,
+    EvolutionContainer
   },
   props: {
     value: {
@@ -45,6 +47,9 @@ export default {
     }
   },
   watch: {
+    itemArray() {
+      console.log('hehehe i changed')
+    },
     value() {
       this.pokemon = this.value
       console.log(this.pokemon.evs)

@@ -12,7 +12,7 @@ export default class Pokemon {
     this.abilities = abilities
     this.sprites = sprites
     this.types = types
-    this.heldItem = new Item(heldItem)
+    this.heldItem = heldItem && new Item(heldItem)
     this.speciesUrl = species.url
     this.selectedAbility = this.getAbilityArray()[0]
     this.nature = randomNature()
@@ -113,7 +113,10 @@ export default class Pokemon {
   }
 
   addEvolutions(arrayOfPokemon) {
+    console.log(arrayOfPokemon)
     this.evolutions = arrayOfPokemon
+      .filter(evo => evo.name !== this.name)
+      .map(evo => new Pokemon(evo))
   }
 
   hasEvolutions() {
