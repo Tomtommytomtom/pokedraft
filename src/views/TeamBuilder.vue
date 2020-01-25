@@ -69,6 +69,8 @@ export default {
     if (!this.pokemons) {
       this.pokemons = getFromLocalStorage()
       this.selectedPokemon = this.pokemons[0]
+      this.makeEvosPokemon()
+      console.log(this.pokemons)
     } else {
       this.selectedPokemon = this.pokemons[0]
       pokeApiService
@@ -109,6 +111,14 @@ export default {
     saveToLocalStorage() {
       console.log(this.pokemons, 'stored')
       localStorage.setItem('stored_pokemon', JSON.stringify(this.pokemons))
+    },
+    makeEvosPokemon() {
+      this.pokemons.forEach(mon =>
+        mon.evolutions.forEach(evo => {
+          Object.setPrototypeOf(evo, Pokemon.prototype)
+        })
+      )
+      console.log(this.pokemons)
     }
   }
 }
