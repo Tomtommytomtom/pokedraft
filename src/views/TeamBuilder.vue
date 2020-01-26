@@ -19,6 +19,7 @@
     <v-btn @click="saveToLocalStorage()">SAVE</v-btn>
     <v-col cols="2">
       <smogon-string-field :pokemons="pokemons" />
+      <v-btn @click="copyToClipboard">COPY TO CLIPBOARD</v-btn>
     </v-col>
   </div>
 </template>
@@ -56,9 +57,13 @@ export default {
       return this.pokemons.map((pokemon, index) => {
         return { item: pokemon.heldItem, index }
       })
+    },
+    smogonString() {
+      return this.pokemons
+        .map(pokemon => pokemon.toSmogonString().join('\n'))
+        .join('\n\n')
     }
   },
-
   watch: {
     pokemons() {
       console.log('ah yes we changed')
@@ -126,6 +131,10 @@ export default {
         })
       )
       console.log(this.pokemons)
+    },
+    copyToClipboard() {
+      console.log(this)
+      this.$copyText(this.smogonString)
     }
   }
 }

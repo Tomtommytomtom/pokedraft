@@ -4,6 +4,7 @@ import router from './router'
 import vuetify from './plugins/vuetify'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
+import VueClipboard from 'vue-clipboard2'
 
 export const bus = new Vue()
 
@@ -41,6 +42,8 @@ requireComponent.keys().forEach(fileName => {
     componentConfig.default || componentConfig
   )
 })
+
+Vue.use(VueClipboard)
 
 new Vue({
   bus,

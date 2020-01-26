@@ -2,10 +2,10 @@
   <div>
     <div v-for="pokemon in pokemons" :key="pokemon.id">
       <span
-        v-for="para in pokemon.toSmogonString()"
-        :key="pokemon.toSmogonString().indexOf(para)"
+        v-for="paragraph in pokemon.toSmogonString()"
+        :key="pokemon.toSmogonString().indexOf(paragraph)"
       >
-        {{ para }}<br />
+        {{ paragraph }}<br />
       </span>
       <br />
     </div>
