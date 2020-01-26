@@ -25,6 +25,7 @@
 
 <script>
 import SmallEvoDetails from './SmallEvoDetails'
+
 export default {
   components: {
     SmallEvoDetails
@@ -41,9 +42,16 @@ export default {
       selectedPokemon: this.evolutions[0]
     }
   },
+  watch: {
+    evolutions() {
+      this.selectedPokemon = this.evolutions[this.evolutions.length - 1]
+    }
+  },
   methods: {
     evolveTo() {
       console.log('evolving to', this.selectedPokemon)
+      this.$emit('evolve-to', this.selectedPokemon)
+      this.dialog = false
     }
   }
 }

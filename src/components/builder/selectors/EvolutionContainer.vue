@@ -1,6 +1,12 @@
 <template>
-  <p v-if="!evolutions">This pokemon has no Evolutions</p>
-  <evolution-dialog v-else :evolutions="evolutions"></evolution-dialog>
+  <p v-if="!pokemon.getEvolutions()">
+    This pokemon has no Evolutions
+  </p>
+  <evolution-dialog
+    v-else
+    :evolutions="pokemon.getEvolutions()"
+    @evolve-to="evolveTo"
+  ></evolution-dialog>
 </template>
 
 <script>
@@ -10,8 +16,13 @@ export default {
     EvolutionDialog
   },
   props: {
-    evolutions: {
-      type: Array
+    pokemon: {
+      type: Object
+    }
+  },
+  methods: {
+    evolveTo(arg) {
+      this.pokemon.evolveTo(arg)
     }
   }
 }
