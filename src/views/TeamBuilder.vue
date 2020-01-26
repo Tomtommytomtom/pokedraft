@@ -6,7 +6,7 @@
           v-for="pokemon in pokemons"
           :key="pokemon.id"
           :pokemon="pokemon"
-          @click.native="selectedPokemon = pokemon"
+          @click.native="select(pokemon)"
         />
       </div>
       <build-container
@@ -99,11 +99,18 @@ export default {
       this.$set(this.pokemons, pokemonToGiveTo, this.pokemons[pokemonToGiveTo])
       console.log(this.pokemons)
     },
-    select(n) {
-      console.log('clicked', n)
+    select(pokemon) {
+      console.log(
+        'selected; evolution line:',
+        pokemon.evolutions,
+        'evolutions',
+        pokemon.getEvolutions()
+      )
+      this.selectedPokemon = pokemon
     },
     addEvos(evos, index) {
       this.pokemons[index].addEvolutions(evos)
+      //this.$set(this.pokemons, index, this.pokemons[index])
     },
     evolve() {
       this.pokemons[2].evolveInto(this.pokemons[2].evolutions[0])
