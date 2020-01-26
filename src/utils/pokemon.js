@@ -17,7 +17,7 @@ export default class Pokemon {
     this.selectedAbility = this.getAbilityArray()[0]
     this.nature = randomNature()
     this.evs = [0, 0, 0, 0, 0, 0]
-    this.evolutions = null
+    this.evolutions = undefined
   }
 
   getStatsObject() {
@@ -91,14 +91,14 @@ export default class Pokemon {
   getHeldItemName() {
     return this.heldItem.name
       .split('-')
-      .map(name => name.toUpperCase())
+      .map(name => capFirstChar(name))
       .join(' ')
   }
 
   toSmogonString() {
     return [
-      `${this.name} @ ${this.getHeldItemName()}`,
-      `Ability: ${this.selectedAbility.toUpperCase()}`,
+      `${capFirstChar(this.name)} @ ${this.getHeldItemName()}`,
+      `Ability: ${capFirstChar(this.selectedAbility, '-')}`,
       `EVs: ${this.getEvString()}`
     ]
   }
@@ -114,9 +114,16 @@ export default class Pokemon {
 
   addEvolutions(arrayOfPokemon) {
     console.log(arrayOfPokemon)
-    this.evolutions = arrayOfPokemon
-      .filter(evo => evo.name !== this.name)
-      .map(evo => new Pokemon(evo))
+    if (arrayOfPokemon) {
+      this.evolutions = arrayOfPokemon.map(evo => new Pokemon(evo))
+    }
+  }
+
+  getEvolutions() {
+    console.log(this.evolutions)
+    return this.evolutions.length !== 1
+      ? this.evolutions.filter(evo => evo.name !== this.name)
+      : undefined
   }
 
   hasEvolutions() {
@@ -129,9 +136,20 @@ export default class Pokemon {
     )
   }
 
-  evolveInto(pokemon) {
+  evolveTo(pokemon) {
     if (this.evolutions.includes(pokemon) && this.hasEvolutions()) {
-      Object.assign(this, pokemon)
+      console.log(this)
+      const carry = this.getCarryValues()
+      Object.assign(this, pokemon, carry)
+    }
+  }
+
+  getCarryValues() {
+    return {
+      evs: this.evs,
+      nature: this.nature,
+      heldItem: this.heldItem,
+      evolutions: this.evolutions
     }
   }
 
@@ -223,4 +241,11 @@ const natures = [
 const randomNature = () => {
   const randIndex = Math.floor(Math.random() * natures.length)
   return natures[randIndex]
+}
+
+const capFirstChar = (string, split = ' ') => {
+  const strings = string.split(split)
+  return strings
+    .map(string => string.charAt(0).toUpperCase() + string.slice(1))
+    .join(split)
 }
