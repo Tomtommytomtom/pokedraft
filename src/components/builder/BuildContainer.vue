@@ -5,7 +5,7 @@
       :abilities="pokemon.getAbilityArray()"
     />
     <item-selector :index="index" :item-array="itemArray" />
-    <evolution-container :evolutions="pokemon.evolutions"></evolution-container>
+    <evolution-container :pokemon="pokemon"></evolution-container>
     <nature-selector v-model="pokemon.nature"></nature-selector>
     <ev-stat-selector
       v-model="pokemon.evs"
