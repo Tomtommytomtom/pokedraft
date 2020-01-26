@@ -99,7 +99,8 @@ export default class Pokemon {
     return [
       `${capFirstChar(this.name)} @ ${this.getHeldItemName()}`,
       `Ability: ${capFirstChar(this.selectedAbility, '-')}`,
-      `EVs: ${this.getEvString()}`
+      `EVs: ${this.getEvString()}`,
+      `${capFirstChar(this.nature)} Nature`
     ]
   }
 
