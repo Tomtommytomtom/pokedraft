@@ -13,7 +13,7 @@
     </v-col>
     <v-col class="d-flex ma-0 pa-0">
       <stat-display :pokemon="pokemon" />
-      <trivia-container />
+      <trivia-container :pokemon="pokemon" />
     </v-col>
   </v-container>
 </template>

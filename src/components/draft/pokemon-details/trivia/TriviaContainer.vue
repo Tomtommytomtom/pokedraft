@@ -3,11 +3,11 @@
     class="d-flex flex-column justify-space-between pa-2"
     style="border: solid 1px rgba(255,255,255,0.2)"
   >
-    <v-card-title>name</v-card-title>
-    <p>types</p>
+    <v-card-title>{{ pokemon.name }}</v-card-title>
+    <p>{{ pokemon.getMainType() }} , {{ pokemon.getSecondaryType() }}</p>
     <v-col class="d-flex">
-      <p>weakness</p>
-      <p>resistance</p>
+      <p>{{ pokemon.getWeakness() }}</p>
+      <p>{{ pokemon.getResistance() }}</p>
     </v-col>
     <v-card-text
       style="border: solid 1px rgba(255,255,255,0.2)"
@@ -23,7 +23,13 @@
 </template>
 
 <script>
-export default {}
+export default {
+  props: {
+    pokemon: {
+      type: Object
+    }
+  }
+}
 </script>
 
 <style></style>

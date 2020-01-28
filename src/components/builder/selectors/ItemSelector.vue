@@ -3,7 +3,7 @@
     v-model="itemText"
     :items="items"
     :item-text="name"
-    label="held item"
+    label="Held Item"
     @input="swapItems"
   ></v-select>
 </template>

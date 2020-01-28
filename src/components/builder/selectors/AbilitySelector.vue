@@ -2,6 +2,7 @@
   <v-select
     v-model="selectedAbility"
     :items="abilities"
+    label="Selected Ability"
     width="30px"
     :disabled="hasOnlyOneAbility"
     @change="emit"
