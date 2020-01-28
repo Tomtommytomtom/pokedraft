@@ -5,6 +5,7 @@ import vuetify from './plugins/vuetify'
 import upperFirst from 'lodash/upperFirst'
 import camelCase from 'lodash/camelCase'
 import VueClipboard from 'vue-clipboard2'
+import Pokedex from './plugins/pokedex'
 
 export const bus = new Vue()
 
@@ -44,6 +45,7 @@ requireComponent.keys().forEach(fileName => {
 })
 
 Vue.use(VueClipboard)
+Vue.use(Pokedex)
 
 new Vue({
   bus,
