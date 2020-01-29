@@ -64,7 +64,8 @@ export default {
     draft() {
       this.pokemonArray = []
       this.selectedPokemon = null
-      draftingService.draftSixPokemonAnd(this.saveIntoPokemonArray)
+      this.pokemonArray = draftingService.draftSixPokemon()
+      console.log(this.pokemonArray)
     },
     saveIntoPokemonArray(draftedPokemon) {
       this.pokemonArray = draftedPokemon

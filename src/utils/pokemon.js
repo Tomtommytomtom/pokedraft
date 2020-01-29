@@ -1,42 +1,33 @@
 import { convertRgbToRgbAlpha } from './colorStringOperations'
 import Item from './itemCategory'
 
-const BASE_URL = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/'
-
 export default class Pokemon {
   constructor(
-    { name, id, stats, abilities, sprites, types, species },
+    { name, id, baseStats, abilities, trivia, sprite, types, evos, prevos },
     heldItem
   ) {
     this.name = name
     this.id = id
-    this.statInfo = stats
+    this.baseStats = baseStats
     this.abilities = abilities
-    this.sprites = sprites
+    this.sprite = sprite
     this.types = types
+    this.trivia = trivia
     this.heldItem = heldItem && new Item(heldItem)
-    this.speciesUrl = species.url
-    this.selectedAbility = this.getAbilityArray()[0]
+    this.selectedAbility = abilities['0']
     this.nature = randomNature()
     this.evs = [0, 0, 0, 0, 0, 0]
-    this.evolutions = undefined
+    this.evos = evos
+    this.prevos = prevos
   }
 
   getStatsObject() {
     //returns {hp: number, attack: number, special-attack: number...}
-    let stats = {}
-    this.statInfo.forEach(stat => {
-      stats[stat.stat.name] = stat.base_stat
-    })
-    return stats
+    return this.baseStats
   }
 
   getAbilityArray() {
-    let abilities = []
-    this.abilities.forEach(ability => {
-      abilities.push(ability.ability.name)
-    })
-    return abilities
+    return Object.values(this.abilities)
   }
 
   getAbilityString() {
@@ -44,30 +35,28 @@ export default class Pokemon {
   }
 
   getSumOfStats() {
-    return Object.values(this.getStatsObject()).reduce((acc, curr) => {
+    return Object.values(this.baseStats).reduce((acc, curr) => {
       return acc + curr
     }, 0)
   }
 
   getSprite() {
-    const padId = String(this.id).padStart(3, '0')
-    return `${BASE_URL}${padId}.png`
+    return this.sprite
   }
 
   getMainType() {
-    if (this.types.length > 1) {
-      return this.types[1].type.name
-    } else {
-      return this.types[0].type.name
-    }
+    return this.types[0]
   }
 
   getSecondaryType() {
-    return this.types[0].type.name
+    return this.types[1]
   }
 
   getColorForType(alpha) {
-    return convertRgbToRgbAlpha(TYPE_STRING_COLOR[this.getMainType()], alpha)
+    return convertRgbToRgbAlpha(
+      TYPE_STRING_COLOR[this.getMainType().toLowerCase()],
+      alpha
+    )
   }
 
   getStatOrderedArray() {
@@ -87,8 +76,7 @@ export default class Pokemon {
   }
 
   getNameLabel() {
-    const name = this.name
-    return name.toUpperCase()
+    return this.name.toUpperCase()
   }
 
   getTier() {
@@ -206,21 +194,14 @@ const statStrings = {
 
 const smogonStatStrings = {
   hp: 'HP',
-  attack: 'Atk',
-  defense: 'Def',
-  'special-attack': 'SpA',
-  'special-defense': 'SpD',
-  speed: 'Spe'
+  atk: 'Atk',
+  def: 'Def',
+  spa: 'SpA',
+  spd: 'SpD',
+  spe: 'Spe'
 }
 
-const statOrder = [
-  'hp',
-  'attack',
-  'defense',
-  'speed',
-  'special-defense',
-  'special-attack'
-]
+const statOrder = ['hp', 'atk', 'def', 'spe', 'spd', 'spa']
 
 const natures = [
   'hardy',
