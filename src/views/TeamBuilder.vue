@@ -6,6 +6,7 @@
           v-for="pokemon in pokemons"
           :key="pokemon.id"
           :pokemon="pokemon"
+          width="124"
           @click.native="select(pokemon)"
         />
       </div>

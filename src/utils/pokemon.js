@@ -1,6 +1,8 @@
 import { convertRgbToRgbAlpha } from './colorStringOperations'
 import Item from './itemCategory'
 
+const BASE_URL = 'https://assets.pokemon.com/assets/cms2/img/pokedex/full/'
+
 export default class Pokemon {
   constructor(
     { name, id, stats, abilities, sprites, types, species },
@@ -48,7 +50,8 @@ export default class Pokemon {
   }
 
   getSprite() {
-    return this.sprites.front_default
+    const padId = String(this.id).padStart(3, '0')
+    return `${BASE_URL}${padId}.png`
   }
 
   getMainType() {
@@ -69,6 +72,14 @@ export default class Pokemon {
 
   getStatOrderedArray() {
     return statOrder.map(stat => this.getStatsObject()[stat])
+  }
+
+  getWeakness() {
+    return 'implement getWeakness()'
+  }
+
+  getResistance() {
+    return 'implement getResistance()'
   }
 
   getStatLabels() {
