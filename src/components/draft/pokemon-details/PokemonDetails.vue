@@ -1,20 +1,12 @@
 <template>
-  <v-container class="d-flex flex-column justify-space-between" fill-height>
-    <v-col class="d-flex ma-0 pa-0">
-      <base-pokemon-container :pokemon="pokemon" />
-      <v-card-title>{{ pokemon.getAbilityString() }}</v-card-title>
-      <v-spacer></v-spacer>
-      <v-btn x-large color="primary" class="my-auto mr-3" @click="pick"
-        >PICK</v-btn
-      >
-    </v-col>
-    <v-col class="d-flex ma-0 pa-0">
-      <p>{{ pokemon.getTier() }}, {{ pokemon.getHeldItemName() }}</p>
-    </v-col>
-    <v-col class="d-flex ma-0 pa-0">
-      <stat-display :pokemon="pokemon" />
-      <trivia-container :pokemon="pokemon" />
-    </v-col>
+  <v-container class="d-flex flex-column" fluid>
+    <v-row no-gutters
+      ><stat-display :pokemon="pokemon" />
+      <base-pokemon-container :pokemon="pokemon" width="400" />
+
+      <pick-section :pokemon="pokemon" @pick="pick" />
+    </v-row>
+    <v-row no-gutters> <trivia-container :pokemon="pokemon" /> </v-row>
   </v-container>
 </template>
 
@@ -22,11 +14,13 @@
 import { bus } from '@/main'
 import StatDisplay from './stats/StatDisplay'
 import TriviaContainer from './trivia/TriviaContainer'
+import PickSection from './pick-section/PickSection'
 
 export default {
   components: {
     StatDisplay,
-    TriviaContainer
+    TriviaContainer,
+    PickSection
   },
 
   props: {

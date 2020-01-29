@@ -1,5 +1,6 @@
 <template>
   <v-sheet height="100%">
+    <p>{{ money }}</p>
     <v-sheet height="80%">
       <v-container fluid fill-height class="align-stretch ma-0 pa-0">
         <v-row no-gutters>
@@ -7,11 +8,9 @@
             ><team-side-bar :picked-pokemon-array="pickedPokemonArray"
           /></v-col>
           <v-divider vertical light />
-          <v-col cols="7"
+          <v-col
             ><smart-pokemon-details :local-pokemon="selectedPokemon"
           /></v-col>
-          <v-divider vertical light />
-          <v-col>other info</v-col>
         </v-row>
       </v-container>
     </v-sheet>
@@ -40,7 +39,8 @@ export default {
       pokemon: {},
       pokemonArray: [],
       selectedPokemon: undefined,
-      pickedPokemonArray: []
+      pickedPokemonArray: [],
+      money: 0
     }
   },
   computed: {
@@ -50,6 +50,7 @@ export default {
   },
 
   created() {
+    console.log(this.$getEntrys())
     this.draft()
     bus.$on('pokemon-selected', pokemon => {
       this.selectedPokemon = pokemon
@@ -69,6 +70,7 @@ export default {
       this.pokemonArray = draftedPokemon
     },
     picked() {
+      this.money += 720 - this.selectedPokemon.getSumOfStats()
       this.pickedPokemonArray.push(this.selectedPokemon)
 
       if (this.hasPickedSixPokemon) {
