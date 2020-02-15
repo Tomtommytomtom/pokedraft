@@ -1,3 +1,5 @@
+moved it to gitlab
+
 # pokedraft
 
 little pokemon drafting game
